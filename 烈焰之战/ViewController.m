@@ -35,7 +35,9 @@
     //网址
     //NSString *httpStr=@"http://danjiyou.duapp.com/Api/Yigui/gameapi";
    // NSString *httpStr=@"http://pulsdk.7724.com/bufanyouxi/loginback/game/jstl";
-    NSString *httpStr=@"http://bfres.xinaigame.com/enter.html?channel=bufanh5";
+   // NSString *httpStr=@"http://bfres.xinaigame.com/enter.html?channel=bufanh5";
+   // NSString *httpStr=@"http://pulsdk.7724.com/bufanyouxi/loginback/game/jstl";
+     NSString *httpStr=@"http://open2829.game.4177.com/game/10433";
     NSURL *httpUrl=[NSURL URLWithString:httpStr];
     NSURLRequest *httpRequest=[NSURLRequest requestWithURL:httpUrl];
     
