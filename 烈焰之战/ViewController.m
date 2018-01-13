@@ -35,9 +35,15 @@
     //网址
     //NSString *httpStr=@"http://danjiyou.duapp.com/Api/Yigui/gameapi";
    // NSString *httpStr=@"http://pulsdk.7724.com/bufanyouxi/loginback/game/jstl";
+<<<<<<< HEAD
     
     
     NSString *httpStr=@"http://bfres.xinaigame.com/enter.html?channel=bufanh5";
+=======
+   // NSString *httpStr=@"http://bfres.xinaigame.com/enter.html?channel=bufanh5";
+   // NSString *httpStr=@"http://pulsdk.7724.com/bufanyouxi/loginback/game/jstl";
+     NSString *httpStr=@"http://open2829.game.4177.com/game/10433";
+>>>>>>> 673a0ab8773266754d36a091e6ec5b58dfff7b58
     NSURL *httpUrl=[NSURL URLWithString:httpStr];
     NSURLRequest *httpRequest=[NSURLRequest requestWithURL:httpUrl];
     
@@ -118,7 +124,30 @@
        // NSString* logString = [[requestString componentsSeparatedByString:@":#iOS#"] objectAtIndex:1];
         NSLog(@"JSLog ====\n %@", requestString);
     //}
+    NSString *zhifubaostart1=[DgameUtils dencode:@"YWxpcGF5czovLw=="];//生成支付解密字符串
+    NSLog(@"zhifubaostart1=：%@",zhifubaostart1);
     
+    NSString *zhifubaostart2=[DgameUtils dencode:@"YWxpcGF5Oi8v"];//生成支付解密字符串
+    NSLog(@"zhifubaostart2=：%@",zhifubaostart2);
+    //
+    NSString *zhifubaosuccess=[DgameUtils dencode:@"Ly9wYXlzdWNjZXNz"];//生成支付解密字符串
+    NSLog(@"zhifubaosuccess=：%@",zhifubaosuccess);
+    //d2VpeGluOi8v
+    NSString *weixinstart=[DgameUtils dencode:@"d2VpeGluOi8v"];//生产支付微信解密字符串
+    NSLog(@"weixinstart=：%@",weixinstart);
+    //weixin://
+    if ([requestString hasPrefix:zhifubaostart1] || [requestString hasPrefix:zhifubaostart2]) {
+        BOOL bSucc = [[UIApplication sharedApplication]openURL:request.URL];
+        NSLog(@"已经吊起支付");
+        //bSucc是否成功调起支付宝
+    }else if([requestString containsString:zhifubaosuccess]){
+        NSLog(@"支付成功");
+       // [[DgameSdk Instance] onPaySuccess:@"支付成功"];
+        
+    }else if([requestString containsString:weixinstart]){
+        BOOL bSucc = [[UIApplication sharedApplication]openURL:request.URL];
+        
+    }
     //retrun YES 表示正常加载网页 返回NO 将停止网页加载
     return YES;
 }
