@@ -35,6 +35,8 @@
     //网址
     //NSString *httpStr=@"http://danjiyou.duapp.com/Api/Yigui/gameapi";
    // NSString *httpStr=@"http://pulsdk.7724.com/bufanyouxi/loginback/game/jstl";
+    
+    
     NSString *httpStr=@"http://bfres.xinaigame.com/enter.html?channel=bufanh5";
     NSURL *httpUrl=[NSURL URLWithString:httpStr];
     NSURLRequest *httpRequest=[NSURLRequest requestWithURL:httpUrl];
@@ -54,7 +56,51 @@
 }
 
 
+-(void) getGameUrl{
 
+    
+    NSString *ddapp_id = [DgameUtils getNSUserDefaultsBykey:@"ddapp_id"];
+    //NSString *idfa = [DgameUtils getNSUserDefaultsBykey:@"idfa"];
+   // NSString *uid = _mUser.userid;
+    
+    
+    // NSString *IDFA=[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 发送二进制form数据
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //响应二进制form数据
+    manager.responseSerializer  = [AFJSONResponseSerializer serializer];
+   
+    NSString *gamebaseurl=@"https://api.jf-q.com/data/game_url/?app_id=";
+    NSString *gameurl=[gameurl stringByAppendingString:ddapp_id];
+
+    
+    NSLog(@"url=%@",gameurl);
+    
+    [manager GET:gameurl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        //todo 统一处理响应数据
+        //success(task,responseObject);
+        NSDictionary *responsedic =(NSDictionary *)responseObject;
+        // NSString *err_msg = [responsedic objectForKey:@"err_msg"];
+        NSLog(@"kgme创建订单%@",responsedic);
+        NSDictionary *KJSON=(NSDictionary*)responseObject;
+        NSString *str=[KJSON objectForKey:@"err_msg"];
+        NSLog(@"kgame创建订单%@",str);
+        if ([str isEqualToString:@"success"]) {
+            NSLog(@"创建订单");
+            NSDictionary *userinfojson = [KJSON objectForKey:@"data"];
+            NSString* kgameorderid=[userinfojson objectForKey:@"id"];
+          
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //todo 统一处理错误
+     
+        
+    }];
+
+}
 
 
 
